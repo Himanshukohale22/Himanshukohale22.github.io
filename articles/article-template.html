@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article Title — Your Name</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Optional: LaTeX math rendering -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-name">YN<span class="cursor">_</span></a>
+    <div class="nav-links">
+      <a href="../index.html#projects">projects</a>
+      <a href="../index.html#articles">articles</a>
+      <a href="../index.html#contact">contact</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <a href="../index.html#articles" class="back">← back to articles</a>
+
+    <div class="hero-meta">theory · 2024-11</div>
+    <h1>Understanding PID Controllers from First Principles</h1>
+    <p class="hero-sub">
+      Deriving the transfer function, exploring tuning methods, 
+      and implementing a working controller on bare-metal ARM.
+    </p>
+    <div class="hero-tags" style="margin-top:1.2rem">
+      <span>Control Theory</span><span>Math</span><span>C</span><span>ARM</span>
+    </div>
+    <div class="page-meta" style="margin-top:1.5rem">
+      ~12 min read &nbsp;·&nbsp; last updated: 2024-11-15
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <article class="prose">
+
+    <h2>Introduction</h2>
+    <p>
+      Write your introduction here. State what you're going to explain, 
+      who it's for, and what the reader will be able to do after reading.
+    </p>
+    <p>
+      PID controllers are everywhere in embedded systems — motor drives, 
+      temperature regulators, flight controllers. But most tutorials just 
+      give you the formula. Let's derive it properly.
+    </p>
+
+    <h2>Background: The Error Signal</h2>
+    <p>
+      The fundamental idea is simple. You have a setpoint \(r(t)\) and 
+      a measured output \(y(t)\). The error is:
+    </p>
+
+    <div class="math-block">e(t) = r(t) − y(t)</div>
+
+    <p>
+      Continue explaining... The controller output \(u(t)\) is what you 
+      feed to your actuator (PWM duty cycle, DAC voltage, etc).
+    </p>
+
+    <h2>The Three Terms</h2>
+
+    <h3>Proportional</h3>
+    <p>The simplest response: scale the error by a gain.</p>
+    <div class="math-block">u_P(t) = Kp · e(t)</div>
+    <p>Explain what this does and why it's not enough on its own...</p>
+
+    <h3>Integral</h3>
+    <p>Accumulate error over time to eliminate steady-state offset.</p>
+    <div class="math-block">u_I(t) = Ki · ∫₀ᵗ e(τ) dτ</div>
+    <p>Explain windup, why you need anti-windup in practice...</p>
+
+    <h3>Derivative</h3>
+    <p>React to the rate of change of error.</p>
+    <div class="math-block">u_D(t) = Kd · de(t)/dt</div>
+    <p>Explain derivative kick, filtering the D term in noisy systems...</p>
+
+    <h2>Full Transfer Function</h2>
+    <div class="math-block">
+C(s) = Kp + Ki/s + Kd·s
+
+       = (Kd·s² + Kp·s + Ki) / s
+    </div>
+
+    <h2>Discretizing for a Microcontroller</h2>
+    <p>
+      Your MCU runs at fixed time steps \(T_s\). 
+      Use the Tustin (bilinear) transform to map the continuous 
+      controller into the z-domain:
+    </p>
+    <div class="math-block">s → (2/T) · (z−1)/(z+1)</div>
+
+    <h2>Implementation in C</h2>
+    <p>
+      Here's a clean, portable implementation. 
+      No floating point if you swap the types for Q15/Q31 fixed-point.
+    </p>
+
+    <pre><code>typedef struct {
+    float kp, ki, kd;
+    float integral;
+    float prev_error;
+    float integral_limit;   /* anti-windup clamp */
+    float dt;               /* sample period in seconds */
+} PID;
+
+float pid_update(PID *pid, float setpoint, float measured) {
+    float error = setpoint - measured;
+
+    /* Integral with anti-windup */
+    pid->integral += error * pid->dt;
+    if (pid->integral >  pid->integral_limit)
+        pid->integral =  pid->integral_limit;
+    if (pid->integral < -pid->integral_limit)
+        pid->integral = -pid->integral_limit;
+
+    /* Derivative (on measurement to avoid derivative kick) */
+    float derivative = -(measured - pid->prev_error) / pid->dt;
+    pid->prev_error = measured;    /* store measurement, not error */
+
+    return pid->kp * error
+         + pid->ki * pid->integral
+         + pid->kd * derivative;
+}</code></pre>
+
+    <!-- Image: step response plot -->
+    <img src="../assets/images/step-response.png" alt="Step response comparison" />
+    <p class="img-caption">Step response: P-only (grey) vs PID tuned (green). Settling time ~80 ms.</p>
+
+    <h2>Tuning</h2>
+    <p>
+      Walk through your tuning method. Ziegler-Nichols? 
+      Trial and error? Model-based? Explain the process you actually use.
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+      Summarize what was covered, point to real hardware where you used this,
+      and link to further reading.
+    </p>
+
+    <h2>References</h2>
+    <ul>
+      <li>K. Åström & T. Hägglund, <em>PID Controllers: Theory, Design and Tuning</em>, 1995</li>
+      <li><a href="#">Link to your working implementation on GitHub</a></li>
+      <li><a href="#">Related project where you used this</a></li>
+    </ul>
+
+  </article>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Title — Your Name</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-name">YN<span class="cursor">_</span></a>
+    <div class="nav-links">
+      <a href="../index.html#projects">projects</a>
+      <a href="../index.html#articles">articles</a>
+      <a href="../index.html#contact">contact</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <a href="../index.html#projects" class="back">← back to projects</a>
+
+    <div class="hero-meta">firmware + hardware · 2024</div>
+    <h1>Your Project Title Here</h1>
+    <p class="hero-sub">
+      One sentence summary of what this project is. 
+      What does it do and why does it exist?
+    </p>
+    <div class="hero-tags" style="margin-top:1.2rem">
+      <span>STM32</span>
+      <span>FreeRTOS</span>
+      <span>CAN Bus</span>
+      <span>KiCad</span>
+    </div>
+    <div class="page-meta" style="margin-top:1.5rem">
+      status: complete &nbsp;·&nbsp; github: 
+      <a href="https://github.com/yourusername/repo">yourusername/repo</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MAIN CONTENT -->
+  <article class="prose">
+
+    <h2>Overview</h2>
+    <p>
+      Explain what this project does in more depth. What problem does it solve? 
+      Who would use it? What are the key specs or constraints that shaped the design?
+    </p>
+
+    <!-- IMAGE: place your photo/screenshot here -->
+    <img src="../assets/images/project-photo.jpg" alt="Project photo description" />
+    <p class="img-caption">Caption describing what's in the photo</p>
+
+    <!-- ── VIDEO (YouTube or local) ──
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+        frameborder="0" allowfullscreen></iframe>
+    </div>
+    -->
+
+    <h2>The Problem</h2>
+    <p>
+      What exactly were you trying to solve? Be specific. Mention real constraints — 
+      power budget, latency, PCB size, cost, available peripherals, whatever shaped 
+      the design decisions that follow.
+    </p>
+
+    <h2>Hardware Design</h2>
+    <p>
+      Describe the schematic, component choices, and PCB layout decisions. 
+      Why this MCU? Why this topology? What tradeoffs did you make?
+    </p>
+    <img src="../assets/images/schematic.png" alt="Schematic" />
+    <p class="img-caption">Top-level schematic — power supply and MCU section</p>
+
+    <h2>Firmware Architecture</h2>
+    <p>
+      Walk through how the software is structured. Task breakdown for RTOS, 
+      ISR design, peripheral initialization, state machine if any.
+    </p>
+
+    <pre><code>/* Example: CAN receive task */
+void can_rx_task(void *pvParameters) {
+    CAN_RxHeaderTypeDef header;
+    uint8_t data[8];
+
+    for (;;) {
+        if (HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0,
+                                  &header, data) == HAL_OK) {
+            process_can_frame(&header, data);
+        }
+        vTaskDelay(pdMS_TO_TICKS(1));
+    }
+}</code></pre>
+
+    <h2>The Math Behind It</h2>
+    <p>
+      This is where you explain any signal processing, control theory, 
+      or protocol math that underpins the project.
+    </p>
+
+    <div class="math-block">
+      <!-- Write equations in plain text or use LaTeX-style notation -->
+      H(s) = Kp + Ki/s + Kd·s
+      
+      For discrete implementation (Tustin / bilinear):
+      H(z) = Kp + Ki·(T/2)·(z+1)/(z-1) + Kd·(2/T)·(z-1)/(z+1)
+    </div>
+
+    <p>
+      Explain what the equation means, where each term comes from, 
+      and how you implemented it on the target hardware.
+    </p>
+
+    <!-- If you want proper LaTeX rendering, uncomment and add MathJax:
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    Then write: \( H(s) = K_p + \frac{K_i}{s} + K_d s \)
+    -->
+
+    <h2>Results & Testing</h2>
+    <p>
+      What did you measure? Oscilloscope captures, data logs, 
+      benchmarks, power consumption numbers. Show the evidence.
+    </p>
+    <img src="../assets/images/oscilloscope.png" alt="Oscilloscope capture" />
+    <p class="img-caption">CAN bus signal at 500 kbit/s — clean rise/fall times</p>
+
+    <h2>What I Would Do Differently</h2>
+    <p>
+      Honest reflection. What broke, what was over-engineered, 
+      what you'd change in v2. This is what makes a portfolio entry actually useful.
+    </p>
+
+    <h2>Resources & References</h2>
+    <ul>
+      <li><a href="#">Link to GitHub repo</a></li>
+      <li><a href="#">Datasheet or reference manual</a></li>
+      <li>Author, <em>Book or Paper Title</em>, Year</li>
+    </ul>
+
+  </article>
+
+</body>
+</html>

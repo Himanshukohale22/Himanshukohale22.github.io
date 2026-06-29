@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Embedded & Linux Developer</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ░░ NAV ░░ -->
+  <nav>
+    <span class="nav-name">YN<span class="cursor">_</span></span>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#articles">articles</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <!-- ░░ HERO ░░ -->
+  <header id="about">
+    <div class="hero-meta">embedded / electronics / linux</div>
+    <h1>Your Name<span class="cursor blink">_</span></h1>
+    <p class="hero-sub">
+      I build things at the boundary of hardware and software — 
+      firmware, custom PCBs, Linux kernel modules, and the math 
+      that ties them together. This is where I document all of it.
+    </p>
+    <div class="hero-tags">
+      <span>C / C++</span>
+      <span>RTOS</span>
+      <span>Linux Kernel</span>
+      <span>PCB Design</span>
+      <span>DSP</span>
+      <span>ARM / RISC-V</span>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- ░░ PROJECTS ░░ -->
+  <section id="projects">
+    <h2 class="section-label">// projects</h2>
+
+    <div class="card-grid">
+
+      <!-- PROJECT CARD — duplicate & edit these -->
+      <article class="card">
+        <div class="card-meta">2024 · firmware + hardware</div>
+        <h3><a href="projects/project-template.html">Project Title Here</a></h3>
+        <p>
+          One or two sentences about what this project does and why 
+          it's interesting. Keep it concrete — what problem, what hardware.
+        </p>
+        <div class="card-tags">
+          <span>STM32</span><span>FreeRTOS</span><span>CAN Bus</span>
+        </div>
+        <a href="projects/project-template.html" class="read-more">read more →</a>
+      </article>
+
+      <article class="card">
+        <div class="card-meta">2024 · linux driver</div>
+        <h3><a href="#">Another Project</a></h3>
+        <p>
+          Short description of the second project. Focus on the technical 
+          challenge — what was hard, what you learned.
+        </p>
+        <div class="card-tags">
+          <span>Linux Kernel</span><span>I2C</span><span>Device Tree</span>
+        </div>
+        <a href="#" class="read-more">read more →</a>
+      </article>
+
+      <article class="card">
+        <div class="card-meta">2023 · electronics</div>
+        <h3><a href="#">Third Project</a></h3>
+        <p>
+          What this project is about in one clear sentence. 
+          Mention the key components or technique used.
+        </p>
+        <div class="card-tags">
+          <span>KiCad</span><span>FPGA</span><span>SPI</span>
+        </div>
+        <a href="#" class="read-more">read more →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ░░ ARTICLES ░░ -->
+  <section id="articles">
+    <h2 class="section-label">// articles & theory</h2>
+
+    <div class="article-list">
+
+      <!-- ARTICLE ROW — duplicate & edit these -->
+      <div class="article-row">
+        <div class="article-date">2024-11</div>
+        <div class="article-body">
+          <a href="articles/article-template.html" class="article-title">
+            Understanding PID Controllers from First Principles
+          </a>
+          <p class="article-excerpt">
+            Deriving the transfer function, tuning methods, 
+            and a working implementation on bare-metal ARM.
+          </p>
+          <div class="card-tags">
+            <span>Control Theory</span><span>Math</span><span>C</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-row">
+        <div class="article-date">2024-09</div>
+        <div class="article-body">
+          <a href="#" class="article-title">
+            Writing a Linux Kernel Module for a Custom UART Device
+          </a>
+          <p class="article-excerpt">
+            Step-by-step walkthrough of character device drivers, 
+            file operations, and talking to hardware from userspace.
+          </p>
+          <div class="card-tags">
+            <span>Linux</span><span>Kernel</span><span>UART</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-row">
+        <div class="article-date">2024-06</div>
+        <div class="article-body">
+          <a href="#" class="article-title">
+            FFT on a Microcontroller: The Math and the Tricks
+          </a>
+          <p class="article-excerpt">
+            Cooley-Tukey algorithm, fixed-point arithmetic, 
+            and getting 1 kHz analysis running on a Cortex-M4.
+          </p>
+          <div class="card-tags">
+            <span>DSP</span><span>Math</span><span>ARM</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ░░ CONTACT ░░ -->
+  <section id="contact">
+    <h2 class="section-label">// contact</h2>
+    <p>
+      Open to collaborations, interesting hardware problems, and 
+      conversations about embedded systems.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:you@email.com">you@email.com</a>
+      <a href="https://github.com/yourusername" target="_blank">github</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>built with plain HTML — no frameworks, no build tools</span>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
