@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Controller — Himanshu Kohale</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-name">YN<span class="cursor">_</span></a>
+    <div class="nav-links">
+      <a href="../index.html#projects">projects</a>
+      <a href="../index.html#articles">articles</a>
+      <a href="../index.html#contact">contact</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <a href="../index.html#projects" class="back">← back to projects</a>
+
+    <div class="hero-meta">firmware + hardware · 2024</div>
+    <h1>Flight Controller</h1>
+    <p class="hero-sub">
+      Baseline Hardware framework for multi-functional UAV.
+    </p>
+    <div class="hero-tags" style="margin-top:1.2rem">
+      <span>STM32</span>
+      <span>PCB</span>
+      <span>SPI/I2C/UART/Can</span>
+      <span>KiCad</span>
+      <span>Firmware</span>
+    </div>
+    <div class="page-meta" style="margin-top:1.5rem">
+      status: complete &nbsp;·&nbsp; github: 
+      <!-- github link -->
+      <a href="https://github.com/Himanshukohale22/TVC_FlightController">Himanshu/FlightController</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MAIN CONTENT -->
+  <article class="prose">
+
+    <h2>Overview</h2>
+    <p>
+      Flight controller Baseline Hardware framework for multifunctional UAV's. 
+      Harware Includes the STM32H7 High performance Microcontroller with exposed peripherals like SPI/UART/Timers/I2C/CAN.
+    </p>
+
+    <!-- IMAGE: place your photo/screenshot here -->
+    <img src="../images/FC/FlightControllerHA.png" alt="Hardware Architecture of FC" />
+    <p class="img-caption">Hardware Architecture of the project</p>
+
+    <!-- ── VIDEO (YouTube or local) ──
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+        frameborder="0" allowfullscreen></iframe>
+    </div>
+    -->
+
+    <h2>The Problem</h2>
+    <p>
+      Drone Autopilot are easy to build in hardware perspective but building a simple protoyping 
+      model which can be used to test your software side code and debugging help is necessary, people always forget.
+      This Hardware model can be used in multi purpose UAV. which is helpful for prototyping or one real UAV according to usecase.
+    </p>
+
+    <h2>Hardware Design</h2>
+    <p>
+      Hardware contains the multiple sensors and open peripherals with STM32H7 serias high.
+      speed microcontroller. following are the included parts in PCB hardware.
+      Microcontroller: [Specify model, e.g., STM32F4]
+      Sensors: IMU (Accelerometer, Gyroscope), Barometer
+      Actuators: Digital Servos for TVC mechanism
+    </p>
+    
+    <img src="../images/FC/FCFrontSide.png" alt="Front Side Schematic" />
+    <p class="img-caption">Top-level PCB — power supply and MCU section</p>
+    <img src="../images/FC/FCBackSide.png" alt="Back Side Schematic" />
+    <p class="img-caption">Bottom-level PCB — power supply and MCU section</p>
+ 
+    <img src="../images/FC/Schematic_1.png" alt="Schematic view 1" />
+    <p class="img-caption">Top-level schematics </p>
+    <img src="../images/FC/Schematic_2.png" alt="Schematic view 2" />
+    <p class="img-caption">Bottom-level schematics </p>
+
+
+    <!-- <h2>Firmware Architecture</h2>
+    <p>
+      Walk through how the software is structured. Task breakdown for RTOS, 
+      ISR design, peripheral initialization, state machine if any.
+    </p> -->
+
+    <!-- <pre><code>/* Example: CAN receive task */
+    void can_rx_task(void *pvParameters) {
+    CAN_RxHeaderTypeDef header;
+    uint8_t data[8];
+
+    for (;;) {
+        if (HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0,
+                                  &header, data) == HAL_OK) {
+            process_can_frame(&header, data);
+        }
+        vTaskDelay(pdMS_TO_TICKS(1));
+    }
+}</code></pre> -->
+
+    <!-- <h2>The Idea Behind It</h2>
+    <p>
+      This is where you explain any signal processing, control theory, 
+      or protocol math that underpins the project.
+    </p> -->
+
+    <!-- <div class="math-block"> -->
+      <!-- Write equations in plain text or use LaTeX-style notation -->
+      <!-- H(s) = Kp + Ki/s + Kd·s
+      
+      For discrete implementation (Tustin / bilinear):
+      H(z) = Kp + Ki·(T/2)·(z+1)/(z-1) + Kd·(2/T)·(z-1)/(z+1)
+    </div> -->
+
+    <!-- <p>
+      Explain what the equation means, where each term comes from, 
+      and how you implemented it on the target hardware.
+    </p> -->
+
+    <!-- If you want proper LaTeX rendering, uncomment and add MathJax:
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    Then write: \( H(s) = K_p + \frac{K_i}{s} + K_d s \)
+    -->
+
+    <!-- <h2>Results & Testing</h2>
+    <p>
+      What did you measure? Oscilloscope captures, data logs, 
+      benchmarks, power consumption numbers. Show the evidence.
+    </p>
+    <img src="../images/FC/FlightControllerHA.png" alt="Oscilloscope capture" />
+    <p class="img-caption">CAN bus signal at 500 kbit/s — clean rise/fall times</p> -->
+
+    <h2>What I Would Do Differently</h2>
+    <p>
+      For future development i would add the RF communication modules on board or i'll craete Father board for this Autopilot 
+      with all the other communication/Camera payload/radar/detections sensors Assembly PCB's and hardware architecture. 
+    </p>
+
+    <h2>Resources & References</h2>
+    <ul>
+      <li><a href="https://github.com/Himanshukohale22/TVC_FlightController">Link to GitHub repo</a></li>
+      <!-- <li><a href="#">Datasheet or reference manual</a></li> -->
+      <!-- <li>Author, <em>Book or Paper Title</em>, Year</li> -->
+    </ul>
+
+  </article>
+
+</body>
+</html>
